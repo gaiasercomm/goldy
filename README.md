@@ -44,6 +44,14 @@ full-cycle test suite:
 
 ## Docker use
 
+To build and push the Docker image on specific source tag:
+
+    TAG=v0.2 make docker-build
+
+    or
+
+    TAG=v0.2 make docker-push
+
 To build the Docker image:
 
 	docker build . -t goldy:latest
