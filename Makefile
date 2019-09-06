@@ -60,7 +60,13 @@ SRCS_H = $(OBJS:.o=.h)
 GEN_KEY = $(MBEDTLS_PROG_DIR)/pkey/gen_key
 CERT_WRITE = $(MBEDTLS_PROG_DIR)/x509/cert_write
 
-.PHONY: all clean distclean deps test format
+# BUILD_DATE = $(shell date +'%Y%m%d')
+SRC_TAG = ${TAG}
+ifeq ("${SRC_TAG}","")
+SRC_TAG = master
+endif
+
+.PHONY: all clean distclean deps test format docker-build docker-push
 
 all: $(APP)
 
@@ -116,3 +122,9 @@ test/keys/test-proxy-cert.pem: test/keys/test-proxy-key.pem $(CERT_WRITE)
 
 format:
 	$(INDENT) $(SRCS_C) $(SRCS_H)
+
+docker-build:
+	docker build --build-arg SRC_TAG=${SRC_TAG} -t nbiotregistry.azurecr.io/${APP}:${SRC_TAG} .
+
+docker-push: docker-build
+	docker push nbiotregistry.azurecr.io/${APP}:${SRC_TAG}
