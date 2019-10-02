@@ -20,4 +20,8 @@ if [ -n "$BACKEND" ]; then
     GOLDY_ARGS="$GOLDY_ARGS -b $BACKEND"
 fi
 
+if [ -n "$LOGLEVEL" ]; then
+    GOLDY_ARGS="$GOLDY_ARGS -g $LOGLEVEL"
+fi
+
 /usr/local/bin/goldy $GOLDY_ARGS $*
