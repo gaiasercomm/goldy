@@ -24,4 +24,8 @@ if [ -n "$LOGLEVEL" ]; then
     GOLDY_ARGS="$GOLDY_ARGS -g $LOGLEVEL"
 fi
 
+if [ -n "$TIMEOUT" ]; then
+    GOLDY_ARGS="$GOLDY_ARGS -t $TIMEOUT"
+fi
+
 /usr/local/bin/goldy $GOLDY_ARGS $*
