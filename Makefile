@@ -123,8 +123,9 @@ test/keys/test-proxy-cert.pem: test/keys/test-proxy-key.pem $(CERT_WRITE)
 format:
 	$(INDENT) $(SRCS_C) $(SRCS_H)
 
+APP_VERSION = v0.3
 docker-build:
-	docker build --build-arg SRC_TAG=${SRC_TAG} -t nbiotregistry.azurecr.io/${APP}:${SRC_TAG} .
+	docker build --build-arg SRC_TAG=${SRC_TAG} -t nbiotregistry.azurecr.io/${APP}:${APP_VERSION} .
 
 docker-push: docker-build
-	docker push nbiotregistry.azurecr.io/${APP}:${SRC_TAG}
+	docker push nbiotregistry.azurecr.io/${APP}:${APP_VERSION}
